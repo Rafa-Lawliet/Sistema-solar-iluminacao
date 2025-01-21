@@ -1,4 +1,5 @@
 import { SpaceObject } from "./SpaceObject";
+import { Light } from "./Light";
 
 export class SpacePosition extends SpaceObject{
     constructor(scale, dimension){
@@ -89,11 +90,12 @@ export class SpacePosition extends SpaceObject{
     supernova_positioner(x = 13, y = 25, z = 5){
         this.supernova = super._get_supernova();
         this.supernova.position.set(x, y, z);
-        console.log('Supernova position:', this.supernova.position);
+        //console.log('Supernova position:', this.supernova.position);
     }
 
-    star_positioner(x = 0, y = 15, z = 0, color){
-        const star = SpaceObject._star_creator(color);
+    star_positioner({ color, x = 0, y = 15, z = 0 } = {}){
+        //console.log('[SpacePosition] star_positioner color:', color);
+        const star = super._star_creator(color);
         star.position.set(x, y, z);
         return star;
     }

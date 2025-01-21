@@ -4,7 +4,7 @@ export class Light{
     constructor(){
     }
 
-    ambient_light({color = 0x404040, intensity = 1} = {}){
+    ambient_light({color = 0x404040, intensity = 0.5} = {}){
         return new THREE.AmbientLight(color, intensity);
     }
 
@@ -23,7 +23,9 @@ export class Light{
         spot_light.position.set(position[0], position[1], position[2]);
         //console.log('Spot light position:', spot_light.position);
         spot_light.rotation.set(rotation[0], rotation[1], rotation[2]);
-        
+        console.log('Spot light rotation:', spot_light.rotation);
+        spot_light.angle = Math.PI / 16;
+        spot_light.target.position.set(20, 0, 25);
         spot_light.castShadow = true;
         /*
         if(helper){
@@ -34,15 +36,16 @@ export class Light{
         return spot_light;
     }
 
-    point_light({color = 0xffffff, intensity = 1,  x = 0, y = 0, z = 20, distance = 0, helper = false} = {}){
+    point_light({color = 0xffffff, intensity = 10,  x = 0, y = 0, z = 20, distance = 0, /*helper = false*/} = {}){
         let point_light = new THREE.PointLight(color, intensity, distance);
         point_light.position.set(x, y, z);
         point_light.castShadow = true;
-
+/*
         if(helper){
             const point_light_helper = new THREE.PointLightHelper(point_light);
             point_light.add(point_light_helper);   
         }
+            */
         return point_light;
     }
 }
